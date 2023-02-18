@@ -21,8 +21,37 @@
     "lib": [
       "es2020",
       "dom"
-    ]
-  },
+    ],
+    "paths": {
+      "@angular/*": [
+        "node_modules/@angular/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@atoms/*": [
+        "src/app/core/atoms/*"
+      ],
+      "@molecules/*": [
+        "src/app/core/molecules/*"
+      ],
+      "@organisms/*": [
+        "src/app/core/organisms/*"
+      ],
+      "@clients/*": [
+        "src/app/shared/clients/*"
+      ],
+      "@implements/*": [
+        "src/app/shared/implements/*"
+      ],
+      "@interfaces/*": [
+        "src/app/shared/interfaces/*"
+      ],
+      "@models/*": [
+        "src/app/shared/models/*"
+      ]
+    }
+    },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

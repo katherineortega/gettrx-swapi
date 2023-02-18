@@ -1,0 +1,20 @@
+@use "src/styles/variables/colors.variables" as colors
+@use "src/styles/variables/typography.variables" as typography
+
+.character-card
+  background-color: colors.$white
+  border: 1px solid $line
+  display: flex
+  flex-direction: column
+  padding: 8px 16px
+
+  .row
+    display: flex
+    justify-content: space-between
+    margin: 4px 0
+
+    .name, .gender, .height
+      font-size: typography.$font-size-base
+      font-weight: typography.$font-weight-normal
+      color: colors.$black
+      margin: 0

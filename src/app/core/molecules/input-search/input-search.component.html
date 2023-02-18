@@ -1,1 +1,14 @@
-<p>input-search works!</p>
+<form class="form" (ngSubmit)="submit($event)">
+  <input class="input"
+         [id]="id"
+         [name]="name"
+         [type]="type"
+         [placeholder]="placeholder"
+         [class.block]="block"
+         [(ngModel)]="value"
+         [disabled]="disabled"/>
+  <app-button type="submit"
+              id="input-search-submit">
+    Search
+  </app-button>
+</form>
