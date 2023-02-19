@@ -14,6 +14,7 @@
 
       <app-search-result class="search-result"
                          [total]="characterTotal"
+                         [loading]="isLoading"
                          [characterList]="characterList"
                          (nextPage)="nextPage()">
       </app-search-result>

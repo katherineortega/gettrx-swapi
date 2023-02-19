@@ -1,5 +1,79 @@
 @use "src/styles/variables/colors.variables" as colors
 @use "src/styles/variables/typography.variables" as typography
 
-.view-button
-  margin: 0 auto
+.character-profile-view
+  display: flex
+  justify-content: center
+
+.character-profile-dialog
+  .row
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    box-sizing: border-box
+    padding: 16px 0
+
+    .column
+      width: 100%
+      display: flex
+      padding: 0 8px
+      box-sizing: border-box
+      margin: 0
+
+      &.first
+        flex: 0 0 100%
+        max-width: 100%
+
+      &.second
+        flex: 0 0 100%
+        max-width: 100%
+
+      &.third
+        flex: 0 0 100%
+        max-width: 100%
+
+  .character-profile-name
+    font-size: 32px
+    margin: 0
+
+  .character-image-box
+    display: block
+
+    .character-image
+      width: 100%
+      border-radius: 8px
+
+  .films
+    width: 100%
+    text-align: center
+
+    .film-list
+      display: flex
+      justify-content: center
+      flex-wrap: wrap
+
+    .film-card
+      padding: 4px
+
+      .film-image
+        border-radius: 4px
+        height: 200px
+        width: 150px
+        background-position: center
+        background-repeat: no-repeat
+        background-size: cover
+
+
+@media screen and (min-width: 768px)
+  .character-profile-dialog
+    .row .column
+      &.first
+        flex: 0 0 30%
+        max-width: 30%
+
+      &.second
+        flex: 0 0 35%
+        max-width: 35%
+        padding-left: 40px
+
+

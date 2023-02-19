@@ -9,23 +9,6 @@
   max-height: 450px
   overflow: scroll
 
-  .spinner-container
-    display: flex
-    justify-content: space-around
-    align-items: center
-    padding: 24px
-
-    .spinner
-      aspect-ratio: 1/1
-      border-radius: 50%
-      animation-name: spin
-      animation-iteration-count: infinite
-      animation-timing-function: linear
-      width: 24px
-      border: 3px solid colors.$primary
-      border-top-color: transparent
-      animation-duration: 1s
-
   .message-container
     display: flex
     justify-content: center
@@ -37,9 +20,8 @@
       font-weight: typography.$font-weight-bold
       margin-bottom: 50px
 
-
-@keyframes spin
-  from
-    transform: rotate(0deg)
-  to
-    transform: rotate(360deg)
+  .loading
+    height: 300px
+    display: flex
+    justify-content: center
+    align-items: center

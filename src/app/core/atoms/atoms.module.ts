@@ -3,18 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "./button/button.component";
 import { TagComponent } from './tag/tag.component';
 import { DialogComponent } from "@atoms/dialog/dialog.component";
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
   declarations: [
     ButtonComponent,
     TagComponent,
-    DialogComponent
+    DialogComponent,
+    SpinnerComponent
   ],
   exports: [
     ButtonComponent,
     TagComponent,
-    DialogComponent
+    DialogComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule

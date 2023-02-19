@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwapiImplementService } from "@implements/swapi/swapi-implement.service";
-import { CharacterSearch } from "@models/search-people.model";
 import { Subscription, take } from "rxjs";
-import { Character } from "@models/character.model";
+import { Character, CharacterSearch } from "@models/character.model";
 
 @Component({
   selector: 'app-home',
@@ -15,6 +14,7 @@ export class HomeComponent implements OnInit {
   public characterSearchNextPage: string | undefined;
   public characterList: Array<Character> = [];
   public isSearching: boolean = false;
+  public isLoading: boolean = false;
   private searchStore: string | undefined;
   private subscriptionList: Array<Subscription> = []
 
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
       this.characterTotal = 0;
       this.characterList = [];
       this.characterSearchNextPage = undefined;
+      this.isLoading = true;
       this.characterSearch(search);
     }
   }
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
         this.characterSearchNextPage = searchPeople.nextPage;
         this.characterList = [...this.characterList, ...searchPeople.resultList];
         this.isSearching = false;
+        this.isLoading = false;
       })
     this.subscriptionList.push(subscription);
   }

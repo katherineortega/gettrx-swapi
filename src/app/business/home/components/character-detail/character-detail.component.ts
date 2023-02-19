@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { Character, CharacterDetail } from "@models/character.model";
+import { CharacterDetail } from "@models/character.model";
 import { SelectedCharacterStoreService } from "../../services/selected-character-store.service";
 import { Subscription, take } from "rxjs";
 import { SwapiImplementService } from "@implements/swapi/swapi-implement.service";
@@ -12,6 +12,7 @@ import { SwapiImplementService } from "@implements/swapi/swapi-implement.service
 export class CharacterDetailComponent implements OnInit, OnDestroy, OnChanges {
 
   public characterDetail: CharacterDetail | undefined;
+  public loading: boolean = false;
   private subscriptionList: Array<Subscription> = []
 
   @Input() clean: boolean = false;
@@ -27,25 +28,29 @@ export class CharacterDetailComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(): void {
     if (this.clean) {
       this.characterDetail = undefined;
-      this.selectedCharacterStore.selectedCharacter = null;
+      this.selectedCharacterStore.selectedCharacterId = null;
     }
   }
 
   selectedCharacterObservable() {
-    const subscription = this.selectedCharacterStore.selectedCharacter$.subscribe(
-      (selectedCharacter: Character | null) => {
-        if (selectedCharacter) this.characterById(selectedCharacter.id);
+    const subscription = this.selectedCharacterStore.selectedCharacterId$.subscribe(
+      (selectedCharacterId: string | null) => {
+        if (selectedCharacterId) this.characterById(selectedCharacterId);
       }
     )
     this.subscriptionList.push(subscription);
   }
 
   characterById(id: string) {
+    this.loading = true;
+    this.selectedCharacterStore.selectedCharacterDetail = null
     const subscription = this.swapiImplement.characterById(id)
       .pipe(take(1))
       .subscribe(
         (characterDetail: CharacterDetail) => {
           this.characterDetail = characterDetail;
+          this.selectedCharacterStore.selectedCharacterDetail = characterDetail;
+          this.loading = false;
         }
       )
     this.subscriptionList.push(subscription);
@@ -53,7 +58,9 @@ export class CharacterDetailComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     this.subscriptionList
-      .forEach((subscription: Subscription) => subscription.unsubscribe())
+      .forEach((subscription: Subscription) => subscription.unsubscribe());
+
+    this.selectedCharacterStore.destroyService();
   }
 
 }

@@ -49,6 +49,9 @@
       ],
       "@models/*": [
         "src/app/shared/models/*"
+      ],
+      "@helpers/*": [
+        "src/app/shared/helpers/*"
       ]
     }
     },

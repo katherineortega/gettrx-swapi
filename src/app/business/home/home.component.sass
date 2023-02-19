@@ -1,11 +1,11 @@
 
 .home
   display: flex
-  max-width: 1280px
+  max-width: 768px
   flex-direction: column
   align-items: center
   margin: 0 auto
-  padding: 40px 0
+  padding: 40px 24px
 
   .title
     margin: 24px auto 40px
@@ -15,6 +15,7 @@
     width: 100%
     justify-content: space-between
     box-sizing: border-box
+    flex-direction: column
 
     .column
       width: 100%
@@ -23,15 +24,10 @@
       flex-direction: column
       box-sizing: border-box
       margin: 0
-      flex-basis: 0
-      flex-grow: 1
       max-width: 100%
 
-      &.first
-        padding-right: 24px
-
       &.second
-        padding-left: 24px
+        text-transform: capitalize
 
 
     .input-search
@@ -39,3 +35,21 @@
 
     .search-result
       margin-bottom: 24px
+
+@media screen and (min-width: 768px)
+  .home
+    max-width: 1280px
+
+    .row
+      flex-direction: row
+
+    .column
+      flex-basis: 0
+      flex-grow: 1
+
+      &.first
+        padding-right: 24px
+
+      &.second
+        padding-left: 24px
+

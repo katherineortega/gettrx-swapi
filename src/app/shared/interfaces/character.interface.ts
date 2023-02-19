@@ -16,3 +16,10 @@ export interface ICharacter {
   edited: string,
   url: string
 }
+
+export interface ICharacterSearch {
+  count: number,
+  next: string,
+  previous: string,
+  results: Array<ICharacter>
+}

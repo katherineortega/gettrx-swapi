@@ -32,25 +32,26 @@
     position: relative
     box-sizing: border-box
     padding: 24px
-    width: 50vw
-    height: 60vh
+    width: 80vw
+    max-height: 80vh
+    overflow: scroll
     background-color: colors.$background
     border-radius: 8px
 
     .dialog-close
       position: absolute
-      right: 24px
-      top: 24px
-      width: 16px
-      height: 16px
+      right: 16px
+      top: 16px
+      width: 24px
+      height: 24px
       cursor: pointer
       opacity: 0.5
 
       &:before, &:after
         position: absolute
-        left: 7px
+        left: 11px
         content: ' '
-        height: 17px
+        height: 25px
         width: 2px
         background-color: colors.$black
 
@@ -61,3 +62,17 @@
         transform: rotate(-45deg)
 
 
+@media screen and (min-width: 768px)
+  .dialog-container
+    .dialog
+      width: 50vw
+
+      .dialog-close
+        width: 16px
+        height: 16px
+        right: 24px
+        top: 24px
+
+        &:before, &:after
+          left: 7px
+          height: 17px

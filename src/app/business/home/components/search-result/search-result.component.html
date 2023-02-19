@@ -1,23 +1,27 @@
 <section #searchResult
          (scroll)="onScroll($event)"
-  class="search-result">
+         class="search-result">
 
   <ng-container *ngIf="characterList?.length">
     <ng-container *ngFor="let character of characterList">
       <app-character-card [character]="character"
-                          [selected]="selectedCharacter?.name === character?.name"
-                          (click)="selectCharacter(character)">
+                          [selected]="selectedCharacterId === character?.id"
+                          (click)="selectCharacterId(character)">
       </app-character-card>
     </ng-container>
 
-    <ng-container *ngIf="isLoading">
-      <div class="spinner-container">
-        <span class="spinner"></span>
-      </div>
+    <ng-container *ngIf="paginationLoading">
+      <app-spinner></app-spinner>
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="!characterList?.length">
+  <ng-container *ngIf="loading">
+    <div class="loading">
+      <app-spinner></app-spinner>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!characterList?.length && !loading && !paginationLoading">
     <div class="message-container">
       <p class="message">There are not People</p>
     </div>

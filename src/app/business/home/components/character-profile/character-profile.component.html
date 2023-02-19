@@ -1,10 +1,56 @@
-<div class="character-profile">
+<div class="character-profile-view">
   <app-button class="view-button"
+              [disabled]="disabled"
               (click)="viewEvent()">
     View
   </app-button>
 </div>
 
 <app-dialog>
+  <ng-container *ngIf="characterDetail">
+    <div class="character-profile-dialog">
 
+      <div class="row">
+        <div class="column first">
+          <div class="character-image-box">
+            <img class="character-image"
+                 [src]="characterDetail.image"
+                 [alt]="characterDetail.name"/>
+          </div>
+        </div>
+
+        <div class="column second">
+          <div class="profile">
+            <h1 class="character-profile-name">{{characterDetail.name}}</h1>
+            <p><b>Brith year:</b> {{characterDetail.birthYear}}</p>
+            <p><b>Species:</b> {{characterSpeciesList.join(', ')}}</p>
+            <p><b>Height:</b> {{characterDetail.height}}</p>
+            <p><b>Mass:</b> {{characterDetail.mass}}</p>
+            <p><b>Gender:</b> {{characterDetail.gender}}</p>
+            <p><b>Hair color:</b> {{characterDetail.hairColor}}</p>
+            <p><b>Skin color:</b> {{characterDetail.skinColor}}</p>
+            <p><b>Homeworld:</b> {{characterHomeWorld}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column third">
+          <div class="films">
+            <h2>Films</h2>
+            <div class="film-list">
+              <ng-container *ngFor="let film of characterFilmList">
+                <div class="film-card">
+                  <div class="film-image"
+                       [style.background-image]="'url(' +film.image + ')'"></div>
+                </div>
+              </ng-container>
+            </div>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
 </app-dialog>

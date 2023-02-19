@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { Character } from "@models/character.model";
+import { Character, CharacterDetail } from "@models/character.model";
 import { SelectedCharacterStoreService } from "../../services/selected-character-store.service";
 import { Subscription } from "rxjs";
 
@@ -20,12 +20,13 @@ import { Subscription } from "rxjs";
 })
 export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
 
-  public selectedCharacter: Character | null = {} as Character;
-  public isLoading: boolean = false;
+  public selectedCharacterId: string | null | undefined;
+  public paginationLoading: boolean = false;
   private enableScrollEvent: boolean = true;
   private subscriptionList: Array<Subscription> = [];
 
   @Input() total: number = 0;
+  @Input() loading: boolean = false;
   @Input() characterList: Array<Character> = [];
   @Output() nextPage: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
@@ -41,7 +42,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(): void {
     if (this.characterList?.length) {
       this.enableScrollEvent = true;
-      this.isLoading = false;
+      this.paginationLoading = false;
     }
   }
 
@@ -59,27 +60,28 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
 
   nextPageEvent() {
     this.enableScrollEvent = false;
-    this.isLoading = true;
+    this.paginationLoading = true;
     this.nextPage.emit(true);
   }
 
   selectedCharacterObservable() {
-    const subscription = this.selectedCharacterStore.selectedCharacter$.subscribe(
-      (selectedCharacter: Character | null) => {
-        this.selectedCharacter = selectedCharacter;
+    const subscription = this.selectedCharacterStore.selectedCharacterDetail$.subscribe(
+      (characterDetail: CharacterDetail | null) => {
+        this.selectedCharacterId = characterDetail?.id;
       }
     )
     this.subscriptionList.push(subscription);
   }
 
-  selectCharacter(selectedCharacter: Character) {
-    this.selectedCharacterStore.selectedCharacter = selectedCharacter;
+  selectCharacterId(selectedCharacter: Character) {
+    this.selectedCharacterStore.selectedCharacterId = selectedCharacter.id;
   }
 
   ngOnDestroy() {
-    this.selectedCharacterStore.selectedCharacter = null;
     this.subscriptionList
       .forEach((subscription: Subscription) => subscription.unsubscribe())
+
+    this.selectedCharacterStore.destroyService();
   }
 
 }

@@ -1,5 +1,5 @@
 <section class="character-detail">
-  <ng-container *ngIf="characterDetail">
+  <ng-container *ngIf="characterDetail && !loading">
 
     <div class="row">
       <p class="column first">Name:</p>
@@ -30,5 +30,11 @@
       <p class="column second">{{characterDetail.eyesColor}}</p>
     </div>
 
+  </ng-container>
+
+  <ng-container *ngIf="loading">
+    <div class="row spinner">
+      <app-spinner></app-spinner>
+    </div>
   </ng-container>
 </section>

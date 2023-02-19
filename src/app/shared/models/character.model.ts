@@ -1,5 +1,6 @@
-import { ICharacter } from "@interfaces/character.interface";
-import { getIdFromUrlHelper, getIdsFromListHelper } from "../helpers/get-id-from-url.helper";
+import { ICharacter, ICharacterSearch } from "@interfaces/character.interface";
+import { getIdFromUrlHelper, getIdsFromListHelper } from "@helpers/get-id-from-url.helper";
+import { environment } from "@environments/environment";
 
 export class Character {
   public id: string;
@@ -29,6 +30,7 @@ export class CharacterDetail extends Character {
   public starships: Array<string>;
   public created: string;
   public edited: string;
+  public image: string | null;
 
   constructor(iCharacter: ICharacter) {
     super(iCharacter);
@@ -43,5 +45,22 @@ export class CharacterDetail extends Character {
     this.starships = getIdsFromListHelper(iCharacter.starships, 'starships');
     this.created = iCharacter.created || '-';
     this.edited = iCharacter.edited || '-';
+    this.image = `${environment.imageBucket}characters/${this.id}.jpg`;
   }
+}
+
+export class CharacterSearch {
+  public total: number;
+  public nextPage: string;
+  public previousPage: string;
+  public resultList: Array<Character>;
+
+  constructor(iSearchPeople: ICharacterSearch) {
+    this.total = iSearchPeople.count;
+    this.nextPage = getIdFromUrlHelper(iSearchPeople.next, 'page=');
+    this.previousPage = iSearchPeople.previous;
+    this.resultList = iSearchPeople.results?.length ? iSearchPeople.results
+      .map((iCharacter: ICharacter) => new Character(iCharacter)) : [];
+  }
+
 }
