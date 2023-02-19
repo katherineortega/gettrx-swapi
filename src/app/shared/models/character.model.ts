@@ -1,28 +1,47 @@
 import { ICharacter } from "@interfaces/character.interface";
+import { getIdFromUrlHelper, getIdsFromListHelper } from "../helpers/get-id-from-url.helper";
 
 export class Character {
+  public id: string;
   public name: string;
-  public height: number | '-';
-  public birthyear: string;
+  public height: string;
+  public birthYear: string;
   public gender: string;
-  constructor(ICharacter: ICharacter) {
-    this.name = ICharacter.name || '-';
-    this.height = ICharacter.height || '-';
-    this.birthyear = ICharacter.birthyear || '-';
-    this.gender = ICharacter.gender || 'n/a';
+
+  constructor(iCharacter: ICharacter) {
+    this.id = getIdFromUrlHelper(iCharacter.url, 'people');
+    this.name = iCharacter.name || '-';
+    this.height = iCharacter.height || '-';
+    this.birthYear = iCharacter.birth_year || '-';
+    this.gender = iCharacter.gender || 'n/a';
   }
 }
 
-export class CharacterPreview extends Character{
-  public mass: number | '-';
+export class CharacterDetail extends Character {
   public skinColor: string;
   public hairColor: string;
   public eyesColor: string;
-  constructor(ICharacter: ICharacter) {
-    super(ICharacter);
-    this.mass = ICharacter.mass || '-';
-    this.skinColor = ICharacter.skinColor || '-';
-    this.hairColor = ICharacter.hairColor || '-';
-    this.eyesColor = ICharacter.eyesColor || '-';
+  public mass: string;
+  public homeWorld: string;
+  public films: Array<string>;
+  public species: Array<string>;
+  public vehicles: Array<string>;
+  public starships: Array<string>;
+  public created: string;
+  public edited: string;
+
+  constructor(iCharacter: ICharacter) {
+    super(iCharacter);
+    this.skinColor = iCharacter.skin_color || '-';
+    this.hairColor = iCharacter.hair_color || '-';
+    this.eyesColor = iCharacter.eye_color || '-';
+    this.mass = iCharacter.mass || '-';
+    this.homeWorld = getIdFromUrlHelper(iCharacter.homeworld, 'planets') || '-';
+    this.films = getIdsFromListHelper(iCharacter.films, 'films');
+    this.species = getIdsFromListHelper(iCharacter.species, 'species');
+    this.vehicles = getIdsFromListHelper(iCharacter.vehicles, 'vehicles');
+    this.starships = getIdsFromListHelper(iCharacter.starships, 'starships');
+    this.created = iCharacter.created || '-';
+    this.edited = iCharacter.edited || '-';
   }
 }

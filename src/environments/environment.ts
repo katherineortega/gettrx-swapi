@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://swapi.dev/api/'
+  api: 'https://swapi.dev/api/',
+  images: 'https://starwars-visualguide.com/assets/img/'
 };
 
 /*

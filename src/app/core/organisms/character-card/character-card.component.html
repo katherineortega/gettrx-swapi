@@ -1,10 +1,12 @@
-<div class="character-card">
+<div class="character-card"
+     [class.active]="selected"
+     (click)="eventClick($event)">
   <div class="row">
-    <p class="name">{{character.name}}</p>
-    <app-tag>{{character.birthyear}}</app-tag>
+    <p class="name">{{character?.name}}</p>
+    <app-tag>{{character?.birthYear}}</app-tag>
   </div>
   <div class="row">
-    <p class="gender">{{character.gender}}</p>
-    <p class="height">{{character.height}}</p>
+    <p class="gender">{{character?.gender}}</p>
+    <p class="height">{{character?.height}}</p>
   </div>
 </div>

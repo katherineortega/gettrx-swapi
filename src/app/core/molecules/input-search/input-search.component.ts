@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-search',
@@ -15,14 +15,15 @@ export class InputSearchComponent {
   @Input() disabled: boolean = false;
   @Input() value: string = '';
 
+  @Output() submit: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() {
   }
 
-  submit(event: Event): void {
+  eventSubmit(event: Event): void {
     event.preventDefault();
     event.stopPropagation();
-    console.log(event);
-    console.log(this.value);
+    this.submit.emit(this.value);
   }
 
 }

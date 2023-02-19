@@ -3,10 +3,17 @@
 
 .character-card
   background-color: colors.$white
-  border: 1px solid $line
+  border: 1px solid colors.$line
   display: flex
   flex-direction: column
   padding: 8px 16px
+  cursor: pointer
+
+  &:hover
+    background-color: lighten(colors.$black, 95%)
+
+  &.active
+    background-color: lighten(colors.$primary, 40%)
 
   .row
     display: flex

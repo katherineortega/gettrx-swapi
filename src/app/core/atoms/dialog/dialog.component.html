@@ -1,0 +1,10 @@
+<div class="dialog-container"
+     [class.opened]="opened">
+  <div class="dialog-background"
+       (click)="close()"></div>
+  <section class="dialog">
+    <span class="dialog-close"
+          (click)="close()"></span>
+    <ng-content></ng-content>
+  </section>
+</div>

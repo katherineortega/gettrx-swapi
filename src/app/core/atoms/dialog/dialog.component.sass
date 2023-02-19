@@ -1,0 +1,63 @@
+@use "src/styles/variables/colors.variables" as colors
+@use "src/styles/variables/typography.variables" as typography
+
+.dialog-container
+  display: none
+  position: fixed
+  z-index: 100
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  align-items: center
+  justify-content: center
+
+  &.opened
+    display: flex
+
+  .dialog-background
+    background-color: rgba(colors.$black, .3)
+    z-index: -1
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    display: flex
+    align-items: center
+    justify-content: center
+
+
+  .dialog
+    position: relative
+    box-sizing: border-box
+    padding: 24px
+    width: 50vw
+    height: 60vh
+    background-color: colors.$background
+    border-radius: 8px
+
+    .dialog-close
+      position: absolute
+      right: 24px
+      top: 24px
+      width: 16px
+      height: 16px
+      cursor: pointer
+      opacity: 0.5
+
+      &:before, &:after
+        position: absolute
+        left: 7px
+        content: ' '
+        height: 17px
+        width: 2px
+        background-color: colors.$black
+
+      &:before
+        transform: rotate(45deg)
+
+      &:after
+        transform: rotate(-45deg)
+
+

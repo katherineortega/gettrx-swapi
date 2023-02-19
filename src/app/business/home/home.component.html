@@ -8,22 +8,24 @@
     <div class="column first">
       <app-input-search placeholder="Search People"
                         class="input-search"
+                        (submit)="inputSearchEvent($event)"
                         [block]="true">
       </app-input-search>
 
-      <app-search-result class="search-result">
+      <app-search-result class="search-result"
+                         [total]="characterTotal"
+                         [characterList]="characterList"
+                         (nextPage)="nextPage()">
       </app-search-result>
 
-      <app-button class="view-button">
-        View
-      </app-button>
+      <app-character-profile>
+      </app-character-profile>
     </div>
 
     <div class="column second">
       <h3>Show information:</h3>
-      <app-character-preview>
-
-      </app-character-preview>
+      <app-character-detail [clean]="isSearching">
+      </app-character-detail>
     </div>
 
   </div>

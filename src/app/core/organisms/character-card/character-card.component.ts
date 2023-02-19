@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Character } from "@models/character.model";
-import { ICharacter } from "@interfaces/character.interface";
 
 @Component({
   selector: 'app-character-card',
@@ -8,12 +7,28 @@ import { ICharacter } from "@interfaces/character.interface";
   styleUrls: ['./character-card.component.sass']
 })
 export class CharacterCardComponent implements OnInit {
+  public selected: boolean = false;
 
-  @Input() character: Character = new Character({} as ICharacter);
+  @Input() character: Character | undefined;
 
-  constructor() { }
+  @Input('selected')
+  set selectedInput(selected: boolean) {
+    this.selected = selected;
+  }
+
+  @Output() click: EventEmitter<Event> = new EventEmitter<Event>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  eventClick(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.selected) {
+      this.click.emit(event);
+    }
+  }
 }
