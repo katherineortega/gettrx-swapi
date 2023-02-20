@@ -1,5 +1,5 @@
 import { ICharacter, ICharacterSearch } from "@interfaces/character.interface";
-import { getIdFromUrlHelper, getIdsFromListHelper } from "@helpers/get-id-from-url.helper";
+import { UrlHelper } from "@helpers/url.helper";
 import { environment } from "@environments/environment";
 
 export class Character {
@@ -10,7 +10,7 @@ export class Character {
   public gender: string;
 
   constructor(iCharacter: ICharacter) {
-    this.id = getIdFromUrlHelper(iCharacter.url, 'people');
+    this.id = UrlHelper.getIdFromUrl(iCharacter.url, 'people');
     this.name = iCharacter.name || '-';
     this.height = iCharacter.height || '-';
     this.birthYear = iCharacter.birth_year || '-';
@@ -38,11 +38,11 @@ export class CharacterDetail extends Character {
     this.hairColor = iCharacter.hair_color || '-';
     this.eyesColor = iCharacter.eye_color || '-';
     this.mass = iCharacter.mass || '-';
-    this.homeWorld = getIdFromUrlHelper(iCharacter.homeworld, 'planets') || '-';
-    this.films = getIdsFromListHelper(iCharacter.films, 'films');
-    this.species = getIdsFromListHelper(iCharacter.species, 'species');
-    this.vehicles = getIdsFromListHelper(iCharacter.vehicles, 'vehicles');
-    this.starships = getIdsFromListHelper(iCharacter.starships, 'starships');
+    this.homeWorld = UrlHelper.getIdFromUrl(iCharacter.homeworld, 'planets') || '-';
+    this.films = UrlHelper.getIdsFromUrlList(iCharacter.films, 'films');
+    this.species = UrlHelper.getIdsFromUrlList(iCharacter.species, 'species');
+    this.vehicles = UrlHelper.getIdsFromUrlList(iCharacter.vehicles, 'vehicles');
+    this.starships = UrlHelper.getIdsFromUrlList(iCharacter.starships, 'starships');
     this.created = iCharacter.created || '-';
     this.edited = iCharacter.edited || '-';
     this.image = `${environment.imageBucket}characters/${this.id}.jpg`;
@@ -57,7 +57,7 @@ export class CharacterSearch {
 
   constructor(iSearchPeople: ICharacterSearch) {
     this.total = iSearchPeople.count;
-    this.nextPage = getIdFromUrlHelper(iSearchPeople.next, 'page=');
+    this.nextPage = UrlHelper.getIdFromUrl(iSearchPeople.next, 'page=');
     this.previousPage = iSearchPeople.previous;
     this.resultList = iSearchPeople.results?.length ? iSearchPeople.results
       .map((iCharacter: ICharacter) => new Character(iCharacter)) : [];

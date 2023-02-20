@@ -1,16 +1,27 @@
-import { TestBed } from '@angular/core/testing';
-
 import { SwapiImplementService } from './swapi-implement.service';
+import { SwapiClientService } from "@clients/swapi/swapi-client.service";
+import { TestBed } from "@angular/core/testing";
 
 describe('SwapiImplementService', () => {
-  let service: SwapiImplementService;
+  let swapiImplementService: SwapiImplementService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SwapiImplementService);
+
+    const MockSwapiClientService: Partial<SwapiClientService> = {};
+
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: SwapiClientService,
+          useValue: MockSwapiClientService
+        },
+        SwapiImplementService
+      ]
+    });
+    swapiImplementService = TestBed.inject(SwapiImplementService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(swapiImplementService).toBeTruthy();
   });
 });

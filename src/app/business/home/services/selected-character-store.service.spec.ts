@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
-
 import { SelectedCharacterStoreService } from "./selected-character-store.service";
 
 describe('SelectedCharacterStoreService', () => {
   let service: SelectedCharacterStoreService;
-
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SelectedCharacterStoreService);
+    service = new SelectedCharacterStoreService();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  it('#getObservableValue should return "string | null" from observable',
+    (done: DoneFn) => {
+      service.selectedCharacterId$.subscribe((value: string | null) => {
+        expect(value).toBe(null);
+        done();
+      });
+    });
 });

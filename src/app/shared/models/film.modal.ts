@@ -1,5 +1,5 @@
 import { IFilm } from "@interfaces/film.interface";
-import { getIdFromUrlHelper } from "@helpers/get-id-from-url.helper";
+import { UrlHelper } from "@helpers/url.helper";
 import { environment } from "@environments/environment";
 
 export class Film {
@@ -8,7 +8,7 @@ export class Film {
   public name: string;
 
   constructor(iFilm: IFilm) {
-    this.id = getIdFromUrlHelper(iFilm.url, 'films')
+    this.id = UrlHelper.getIdFromUrl(iFilm.url, 'films')
     this.name = iFilm.title || '';
     this.image = `${environment.imageBucket}films/${this.id}.jpg`
   }

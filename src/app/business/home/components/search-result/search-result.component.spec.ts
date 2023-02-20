@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultComponent } from './search-result.component';
+import { SelectedCharacterStoreService } from "../../services/selected-character-store.service";
 
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
@@ -8,7 +9,8 @@ describe('SearchResultComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchResultComponent ]
+      declarations: [ SearchResultComponent ],
+      providers: [ SelectedCharacterStoreService ]
     })
     .compileComponents();
 
